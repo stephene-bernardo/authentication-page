@@ -1,26 +1,2 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="uk-width-1-1">
-        <div class="uk-position-center uk-width-1-4">
-                <div>
-                        <fieldset class="uk-fieldset">
-                                <legend class="uk-legend">Login</legend>
-                                <div class="uk-margin">
-                                        <input class="uk-input" 
-                                            type="text" 
-                                            placeholder="Username"
-                                            [(ngModel)]="login">
-                                </div>
-                                <div class="uk-margin">
-                                        <input class="uk-input" 
-                                        type="text" 
-                                        placeholder="Password"
-                                        [(ngModel)]="password">
-                                </div>
-                                <button class=" uk-width-1-1 uk-button uk-button-default"
-                                        (click)="onSignIn(login, password)">
-                                        Sign In
-                                </button>
-                        </fieldset>
-                </div>
-        </div>
-</div>
+<router-outlet></router-outlet>
