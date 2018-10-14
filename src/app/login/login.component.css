@@ -1,0 +1,26 @@
+
+
+.signin-button{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 10px
+   
+}
+
+.signin-image {
+    height: 30%;
+    width: 40%;
+}
+.signin-image:hover{
+    cursor: pointer;
+}
+
+.google-auth {
+    content: url('../../assets/btn_google_signin_dark_normal_web.png');
+}
+.google-auth:hover {
+    content: url('../../assets/btn_google_signin_dark_focus_web.png');
+}
+.google-auth:active{
+    content: url('../../assets/btn_google_signin_dark_pressed_web.png');
+}

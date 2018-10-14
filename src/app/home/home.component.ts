@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,30 +15,20 @@ export class HomeComponent implements OnDestroy, OnInit {
   subscription: Subscription;
   userInfo$: Observable<any>;
 
-  constructor(private http: HttpClient, private router: Router, private zone: NgZone) {
+  constructor(private http: HttpClient, private router: Router, private zone: NgZone, private authService: AuthService) {
     this.subscription = Observable.fromEvent(document, 'keypress').subscribe(e => {
       if (e['key'] === ' ') {
         localStorage.clear();
-          this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       }
     });
   }
 
   async ngOnInit() {
-    const storeAuthToken = localStorage.getItem('authToken').split(' ');
-    if (storeAuthToken) {
-      const headers = new HttpHeaders({ 'token': storeAuthToken[1] });
-      if (storeAuthToken[0] === 'dbauth') {
-        this.userInfo$ = await this.http.get('http://localhost:3000/getUserInfo', { headers: headers });
-      } else if (storeAuthToken[0] === 'googleAuth') {
-        this.userInfo$ = await this.http.get('http://localhost:3000/auth/getGoogleInfo', { headers: headers });
-      }
-    } else {
-      this.router.navigate(['/login']);
-    }
+    const storeAuthToken = localStorage.getItem('authToken');
+    this.userInfo$ = await this.authService.getUserInfo(storeAuthToken);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

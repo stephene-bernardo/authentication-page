@@ -1,6 +1,6 @@
 <div class="uk-width-1-1">
         <div class="uk-position-center uk-width-1-4">
-                <form #authenticate="ngForm" (click)="onSignIn(authenticate.login, authenticate.password)">
+                <form #authenticate="ngForm" (click)="onSignInDbAuth(authenticate.login, authenticate.password)">
                         <fieldset class="uk-fieldset">
                                 <legend class="uk-legend" style="color:white">Login</legend>
                                 <div class="uk-margin">
@@ -17,14 +17,17 @@
                                          [(ngModel)]="authenticate.password"
                                          name="password">
                                 </div>
-                          
                         </fieldset>
-                        <div id="googleBtn" class="g-signin2" data-theme="dark">abc</div>
+            
+                        <div class="signin-button">
+                                <div class="signin-image google-auth" id="googleBtn" (click)="onSignInGoogleAuth()"></div>
+                                <img class="signin-image"  (click)="onSignInFacebookAuth('facebook')" src="../../assets/facebook.png">
+                        </div>
+   
                         <button class=" uk-width-1-1 uk-button uk-button-default"   style="color:white">
                                         Sign In
                         </button>
                 </form>
                 <button id="authorize-button" style="display: none;">Authorize</button>
         </div>
-   
 </div>

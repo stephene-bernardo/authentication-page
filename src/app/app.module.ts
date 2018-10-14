@@ -7,6 +7,25 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 
+
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  FacebookLoginProvider,
+} from 'angular5-social-login';
+import { AuthService } from './auth.service';
+
+export function getAuthServiceConfigs() {
+  const config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider('327542771383174')
+        },
+      ]);
+  return config;
+}
+
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: HomeComponent}
@@ -24,9 +43,10 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [{provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
